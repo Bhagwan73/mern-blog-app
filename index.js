@@ -7,10 +7,7 @@ require("dotenv").config({path:"./.env"})
 const cookieParser=require("cookie-parser")
 app.use(cookieParser())
 app.use(express.json())
-app.use(corse({
-    origin:"http://localhost:3000",
-    credentials:true
-}))
+app.use(corse())
 app.use("/",route)     
 
 mongoose.connect(process.env.MONGO_STRING,{useNewUrlParser:true})
