@@ -31,7 +31,11 @@ exports.login = async (req, res) => {
         if (!pass) return res.status(400).send({ status: false, message: "wrong password" })
         sign({username:username, userId: user._id}, process.env.SEC_KEY, (err, token) => {
             if (err) return res.status(401).send({ status: false, message: err })
-            res.cookie('token', token);
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: true, // Set to true if served over HTTPS
+                sameSite: 'none' // Set to 'none' to allow cross-site cookies
+              });
             return res.status(200).send({username:username,userId:user._id}) // this data will store in userContex
         })
     } catch (err) {
