@@ -7,7 +7,7 @@ require("dotenv").config({path:"./.env"})
 const cookieParser=require("cookie-parser")
 app.use(cookieParser())
 app.use(express.json())
-app.use(cors({
+app.use(corse({
   origin: true,
   credentials: true
 }));
